@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { apiBaseURL, headers } from '../config/index.js';
-import FavoritePlayers from '../models/favoritePlayers.js';
+//import FavoritePlayers from '../models/favoritePlayers.js';
 //Section for main framework for API
+// ignore this and rewrite it to have a route fetch to the football data, then make it desplay to user on the frontend, give the user option to store to local database, then make routes for the data to go to the database, then make that database the favorite players DB there youll perform CRUD fully
 const getPlayerById = async (req,res) => {
   try {
     const personId = req.params.id;
-    const apiUrl = `${apiBaseURL}/persons/${personId}`;
+    const apiUrl = `${apiBaseURL}v4/persons/${personId}`;
     console.log('API URL:', apiUrl)
 
     const response = await axios.get(apiUrl, {headers});
@@ -26,7 +27,7 @@ const getPlayerById = async (req,res) => {
 const createPlayer = async (req,res) => {
   try {
     const { name, nationality, club } = req.body;
-    const apiUrl = `${apiBaseURL}/persons`;
+    const apiUrl = `${apiBaseURL}v4/persons`;
     console.log('API URL:', apiUrl);
 
     const response = await axios.post(apiUrl, {name, nationality, club}, { headers });
@@ -48,7 +49,7 @@ const updatePlayer = async (req,res) => {
   try {
     const personId = req.params.id;
     const { name, nationality, club} = req.body;
-    const apiUrl = `${apiBaseURL}/persons/${personId}`;
+    const apiUrl = `${apiBaseURL}v4/persons/${personId}`;
     console.log('API URL:', apiUrl);
 
     const response = await axios.put(apiUrl, {name, nationality, club}, {headers});
@@ -69,7 +70,7 @@ const updatePlayer = async (req,res) => {
 const deletePlayer = async (req,res) => {
   try {
     const personId = req.params.id;
-    const apiUrl = `${apiBaseURL}/persons/${personId}`
+    const apiUrl = `${apiBaseURL}v4/persons/${personId}`
     console.log('API URL:', apiUrl);
     
     const response = await axios.delete(apiUrl, {headers});
@@ -87,7 +88,7 @@ const deletePlayer = async (req,res) => {
   }
 };
 //Section for favorite players
-const addFavPlayer = async (req,res) => {
+/*const addFavPlayer = async (req,res) => {
   try {
     const userId = req.userId;
     const {playerId, playerName, playerNationality, playerClub} = req.body;
@@ -140,13 +141,14 @@ const handleError = (res, error) => {
   } else {
     res.status(500).json({error:'internal server error'});
   }
-};
-export {
+};*/
+const controller = {
   getPlayerById,
   createPlayer,
   updatePlayer,
   deletePlayer,
-  addFavPlayer,
-  getFavPlayers,
-  removeFavPlayers
+  //addFavPlayer,
+  //getFavPlayers,
+  //removeFavPlayers
 }
+export default controller

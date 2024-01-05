@@ -1,19 +1,20 @@
-import 'dotenv/config'
+import 'dotenv/config.js'
 import express from 'express'
-import mongoose from 'mongoose'
+//import mongoose from 'mongoose'
 import cors from 'cors'
-//import { apiBaseURL, headers } from '../config/index.cjs'
-
-
+import controller from './controllers/controllers.js' 
+import { apiBaseURL, headers } from './config/index.js'
+import router from './routes/routes.js'
+import mongoose from './connection.js'
 
 const app = express()
 const PORT = process.env.PORT || 3000
 
-//app.use(mongoose)
+//app.use(mongoose())
 app.use(cors())
 app.use(express.json())
-//app.use('/', routes)
-//app.use(footballData)
+app.use('/api', router)
+
 
 
 

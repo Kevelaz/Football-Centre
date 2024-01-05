@@ -1,21 +1,13 @@
 import express from 'express'
 import axios from 'axios'
-import { 
-  getPlayerById,
-  createPlayer,
-  updatePlayer,
-  deletePlayer,
-  addFavPlayer,
-  getFavPlayers,
-  removeFavPlayers
-} from '../controllers/controllers'
+import controller from '../controllers/controllers.js'
 import { apiBaseURL, headers } from '../config/index.js'
 
 const router = express.Router()
 
 router.get('/', async (req,res) => {
   try {
-    const apiUrl = `${apiBaseURL}/persons`;
+    const apiUrl = `${apiBaseURL}v4/persons`;
     const response = await axios.get(apiUrl, {headers});
     res.json(response.data);
   } catch (error) {
@@ -24,18 +16,18 @@ router.get('/', async (req,res) => {
   }
 });
 
-router.get('/:id', getPlayerById);
+router.get('/persons/:id', controller.getPlayerById);
 
-router.post('/', createPlayer);
+router.post('/persons', controller.createPlayer);
 
-router.put('/:id', updatePlayer);
+router.put('/persons/:id', controller.updatePlayer);
 
-router.delete('/:id', deletePlayer);
+router.delete('/persons/:id', controller.deletePlayer);
 
-router.post('/add-favorite', addFavPlayer);
+//router.post('/add-favorite', controller.addFavPlayer);
 
-router.get('/favorite-players', getFavPlayers);
+//router.get('/favorite-players', controller.getFavPlayers);
 
-router.delete('/remove-favorite/:playerId', removeFavPlayers);
+//router.delete('/remove-favorite/:playerId', controller.removeFavPlayers);
 
 export default router
