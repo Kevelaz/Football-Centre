@@ -23,4 +23,10 @@ db.once('open', () => {
 db.once('close', () => {
   console.log('Disconnected from MongoDB');
 });
+
+process.on('SIGINT', () => {
+  mongoose.connection.close(() => {
+    console.log('mongodb connection closed due to app termination')
+  })
+})
 export default mongoose

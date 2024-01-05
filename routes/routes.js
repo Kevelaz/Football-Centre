@@ -16,7 +16,12 @@ router.get('/', async (req,res) => {
   }
 });
 
-router.get('/persons/:id', controller.getPlayerById);
+router.get('/players/:id', controller.getPlayerById);
+
+router.post('/players/:id/mark-as-favorite', controller.markAsFavorite)
+
+router.delete('/players/:id/unmark-favorite', controller.unmarkAsFav)
+
 
 router.post('/persons', controller.createPlayer);
 
