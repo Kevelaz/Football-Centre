@@ -23,16 +23,6 @@ router.post('/players/:id/mark-as-favorite', controller.markAsFavorite)
 router.delete('/players/:id/unmark-favorite', controller.unmarkAsFav)
 
 
-router.post('/persons', controller.createPlayer);
 
-router.put('/persons/:id', controller.updatePlayer);
-
-router.delete('/persons/:id', controller.deletePlayer);
-
-//router.post('/add-favorite', controller.addFavPlayer);
-
-//router.get('/favorite-players', controller.getFavPlayers);
-
-//router.delete('/remove-favorite/:playerId', controller.removeFavPlayers);
 
 export default router
