@@ -1,6 +1,8 @@
-/*import mongoose from "mongoose";
+import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
-  username: {type: String, required: true, unique:true}
-  favoritePlayers: [{mongoose.Schema.Types.ObjectId, }]
-}) */
+  username: {type: String, required: true, unique:true},
+  favoritePlayers: [{type: mongoose.Schema.Types.ObjectId, ref: "FavoritePlayer" }]
+}) 
+const User = mongoose.model('User', UserSchema)
+export default User
