@@ -21,7 +21,7 @@ router.get('/extract-players/:id', mainController.getPlayerById);
 
 router.get('/players/:id', mainController.getPlayerInfo)
 
-router.post('/players/:id/favorite/:username', favoriteController.markPlayerAsFav)
+router.post('/players/:id/favorite', favoriteController.markPlayerAsFav)
 
 router.get('/favorite-list', favoriteController.getFavPlayerList)
 

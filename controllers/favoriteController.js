@@ -9,29 +9,29 @@ import User from '../models/user.js';
 const markPlayerAsFav = async (req,res) => {
   try {
     const playerId = req.params.id
-    const username  = req.params.username
+  //  const username  = req.params.username
 
     const player = await Player.findOne({ playerId })
 
     if (!player) {
       return res.status(404).json({error: 'player not found '})
     }
-    const user = await User.findOne({ username})
+  //  const user = await User.findOne({ username})
 
-    if(!user) {
-      return res.status(404).json({ error: 'user not found '})
-    }
+  //  if(!user) {
+  //    return res.status(404).json({ error: 'user not found '})
+  //  }
     const favoritePlayer = new FavoritePlayers({
       playerId: player.playerId,
       name: player.name,
       nationality: player.nationality,
       currentTeam: player.currentTeam,
-      user: user.id,
+    //  user: user.id,
     });
 
     await favoritePlayer.save();
 
-    await User.findByIdAndUpdate(user.id, { $push: { favoritePlayers: favoritePlayer.id } });
+  //  await User.findByIdAndUpdate(user.id, { $push: { favoritePlayers: favoritePlayer.id } });
 
 
     res.json({ message: 'Player marked as favorite', isFavorite: true });
@@ -69,14 +69,6 @@ const savePlayerToFavs = async (playerData) => {
 
 
 
-
-
-
-
-
-
-
-
 const getFavPlayerList = async (req,res) => {
   try {
     const favPlayers = await FavoritePlayers.find().sort({name:1}).limit(7);
@@ -108,7 +100,7 @@ const updateFavPlayer = async (req,res) => {
     if(currentTeam) player.currentTeam = currentTeam
 
     await player.save()
-    res.json({message:'favroite player updated sucessfully', player})
+    res.json({message:'favorite player updated sucessfully', player})
   } catch (error) {
     console.error('error updating favorite player', error)
     res.status(500).json({error: 'internal server error'})
@@ -119,16 +111,16 @@ const updateFavPlayer = async (req,res) => {
 const removeFavPlayer = async (req,res) => {
   try {
     const playerId = req.params.id
-    const userId = req.user.id
+  //  const userId = req.user.id
 
-    const favoritePlayer = await FavoritePlayers.findOne({playerId, user: userId})
+    const favoritePlayer = await FavoritePlayers.findOne({playerId})
 
     if(!favoritePlayer) {
       return res.status(404).json({ error: 'favorite player not found' })
     }
     await FavoritePlayers.findOneAndDelete(favoritePlayer.id)
 
-    await User.findByIdAndUpdate(userId, {$pull: {favoritePlayers: favoritePlayer.id}})
+  //  await User.findByIdAndUpdate(userId, {$pull: {favoritePlayers: favoritePlayer.id}})
 
     res.json({message: 'favorite player deleted successfully'})
   } catch (error) {
