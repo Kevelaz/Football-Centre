@@ -19,9 +19,9 @@ router.get('/', async (req,res) => {
 
 router.get('/extract-players/:id', mainController.getPlayerById);
 
-router.get('/players/:id', mainController.getPlayerInfo)
+router.get('/players/:id?/:name?', mainController.getPlayerInfo)
 
-router.post('/players/:id/favorite', favoriteController.markPlayerAsFav)
+router.post('/players/:id?/:name?/favorite', favoriteController.markPlayerAsFav)
 
 router.get('/favorite-list', favoriteController.getFavPlayerList)
 

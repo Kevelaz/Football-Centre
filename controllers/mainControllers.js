@@ -5,7 +5,7 @@ import FavoritePlayers from '../models/favoritePlayers.js';
 import User from '../models/user.js';
 
 //Section for main framework for API
-// ignore this and rewrite it to have a route fetch to the football data, then make it desplay to user on the frontend, give the user option to store to local database, then make routes for the data to go to the database, then make that database the favorite players DB there youll perform CRUD fully
+
 const getPlayerById = async (req,res) => {
   try {
     const personId = req.params.id;
@@ -57,19 +57,33 @@ const savePlayerToDatabase = async (playerData) => {
 
 const getPlayerInfo = async (req, res) => {
   try {
-    const playerId = req.params.id
+    const { id, name } = req.params;
 
-    const player = await Player.findOne({ playerId })
+    if (id || name) {
+      let query = {};
 
-    if(!player) {
-      return res.status(404).json ({ error: 'Player not found '})
+      if (id) {
+        query = { playerId: id };
+      } else if (name) {
+        query = { name: name };
+      }
+    console.log('query:', query )
+      const player = await Player.findOne(query);
+
+      if (!player) {
+        return res.status(404).json({ error: 'Player not found' });
+      }
+
+      return res.json(player.toObject());
+    } else {
+      return res.status(400).json({ error: 'Bad request: Provide playerId or playerName' });
     }
-    res.json(player.toObject())
-  } catch(error) {
-    console.error('error fetching player info', error)
-    res.status(500).json({ error: 'internal server error'})
+  } catch (error) {
+    console.error('Error fetching player info', error);
+    return res.status(500).json({ error: 'Internal server error' });
   }
-}
+};
+
 
 
 
@@ -78,5 +92,6 @@ const getPlayerInfo = async (req, res) => {
 const mainController = {
   getPlayerById,
   getPlayerInfo,
+  
 }
 export default mainController

@@ -5,6 +5,10 @@ const registerUser = async (req,res) => {
   try {
     const {username} = req.body
 
+    if(!username || username.trim() === '') {
+      return res.status(400).json({message:'username is required'})
+    }
+
     const existingUser = await User.findOne({ username })
 
     if(existingUser) {

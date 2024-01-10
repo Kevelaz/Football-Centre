@@ -9,29 +9,23 @@ import User from '../models/user.js';
 const markPlayerAsFav = async (req,res) => {
   try {
     const playerId = req.params.id
-  //  const username  = req.params.username
 
     const player = await Player.findOne({ playerId })
 
     if (!player) {
       return res.status(404).json({error: 'player not found '})
     }
-  //  const user = await User.findOne({ username})
 
-  //  if(!user) {
-  //    return res.status(404).json({ error: 'user not found '})
-  //  }
     const favoritePlayer = new FavoritePlayers({
       playerId: player.playerId,
       name: player.name,
       nationality: player.nationality,
       currentTeam: player.currentTeam,
-    //  user: user.id,
     });
 
     await favoritePlayer.save();
 
-  //  await User.findByIdAndUpdate(user.id, { $push: { favoritePlayers: favoritePlayer.id } });
+
 
 
     res.json({ message: 'Player marked as favorite', isFavorite: true });
@@ -111,7 +105,6 @@ const updateFavPlayer = async (req,res) => {
 const removeFavPlayer = async (req,res) => {
   try {
     const playerId = req.params.id
-  //  const userId = req.user.id
 
     const favoritePlayer = await FavoritePlayers.findOne({playerId})
 
@@ -120,7 +113,6 @@ const removeFavPlayer = async (req,res) => {
     }
     await FavoritePlayers.findOneAndDelete(favoritePlayer.id)
 
-  //  await User.findByIdAndUpdate(userId, {$pull: {favoritePlayers: favoritePlayer.id}})
 
     res.json({message: 'favorite player deleted successfully'})
   } catch (error) {
