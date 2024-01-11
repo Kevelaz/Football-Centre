@@ -1,8 +1,7 @@
-//import axios from 'axios';
-//import { apiBaseURL, headers } from '../config/index.js';
+
 import Player from '../models/player.js';
 import FavoritePlayers from '../models/favoritePlayers.js';
-//import User from '../models/user.js';
+
 
 const markPlayerAsFav = async (req,res) => {
   try {

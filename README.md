@@ -20,7 +20,7 @@ ChatGPT
 
 ### Links 
 https://trello.com/b/KKpIUUEC/football-centre
-
+https://football-centre.netlify.app/
 
 
 # User Stories

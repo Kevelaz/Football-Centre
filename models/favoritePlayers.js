@@ -7,7 +7,7 @@ const favPlayerSchema = new mongoose.Schema({
   nationality: {type: String, required: true},
   currentTeam: { type: Object, required:true},
   isFavorite: Boolean,
-//  user: { type:mongoose.Schema.Types.ObjectId, ref: 'User'}
+
 })
 
 const FavoritePlayers = mongoose.model('FavoritePlayer', favPlayerSchema);
