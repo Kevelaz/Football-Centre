@@ -1,16 +1,14 @@
-import axios from 'axios';
-import { apiBaseURL, headers } from '../config/index.js';
+//import axios from 'axios';
+//import { apiBaseURL, headers } from '../config/index.js';
 import Player from '../models/player.js';
 import FavoritePlayers from '../models/favoritePlayers.js';
-import User from '../models/user.js';
-
-
+//import User from '../models/user.js';
 
 const markPlayerAsFav = async (req,res) => {
   try {
     const playerId = req.params.id
 
-    const player = await Player.findOne({ playerId })
+    const player = await Player.findOne( {playerId: playerId.toString()} )
 
     if (!player) {
       return res.status(404).json({error: 'player not found '})
@@ -24,10 +22,7 @@ const markPlayerAsFav = async (req,res) => {
     });
 
     await favoritePlayer.save();
-
-
-
-
+    
     res.json({ message: 'Player marked as favorite', isFavorite: true });
   } catch (error) {
     console.error('error marking player as favorite', error)
@@ -67,9 +62,6 @@ const getFavPlayerList = async (req,res) => {
   try {
     const favPlayers = await FavoritePlayers.find().sort({name:1}).limit(7);
 
-    //if(favPlayers.length === 0) {
-      //return res.json({message: 'No favorite players found' });
-    //}
     res.json(favPlayers)
   } catch (error) {
     console.error('error fetching favorite player list:', error)
@@ -79,13 +71,13 @@ const getFavPlayerList = async (req,res) => {
 
 const updateFavPlayer = async (req,res) => {
   try {
-    const playerId = req.params.id;
+    const playerId = req.params._id
     const {name, currentTeam} = req.body
 
     if(!name && !currentTeam) {
       return res.status(400).json({error: 'name or currentTeam must be provided for update'})
     }
-    const player = await FavoritePlayers.findOne({ playerId })
+    const player = await FavoritePlayers.findOne(playerId)
 
     if(!player) {
       return res.status(404).json({error: 'favorite player not found '})
@@ -106,14 +98,15 @@ const removeFavPlayer = async (req,res) => {
   try {
     const playerId = req.params.id
 
-    const favoritePlayer = await FavoritePlayers.findOne({playerId})
+    console.log('playerId from request:', playerId)
+
+    const favoritePlayer = await FavoritePlayers.findByIdAndDelete(playerId)
+
+    console.log('favorite player found:', favoritePlayer)
 
     if(!favoritePlayer) {
       return res.status(404).json({ error: 'favorite player not found' })
     }
-    await FavoritePlayers.findOneAndDelete(favoritePlayer.id)
-
-
     res.json({message: 'favorite player deleted successfully'})
   } catch (error) {
     console.error('error deleting favorite player', error)

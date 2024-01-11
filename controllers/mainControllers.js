@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { apiBaseURL, headers } from '../config/index.js';
 import Player from '../models/player.js';
-import FavoritePlayers from '../models/favoritePlayers.js';
-import User from '../models/user.js';
+//import FavoritePlayers from '../models/favoritePlayers.js';
+//import User from '../models/user.js';
 
 //Section for main framework for API
 
