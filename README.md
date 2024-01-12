@@ -1,14 +1,23 @@
 # Football-Centre
 
 ## Description
-This is an app that lets you look up soccer players from various different leagues across Europe
+This is an app that lets you look up soccer players from various different leagues across Europe.I used a free third party API in order to use accurate and up to date information on selected players
 
 ## Technologies Used
 Javascript
 HTML
 CSS
 ChatGPT
+footballdata.org
 
+## Routes 
+| Route            | Purpose                                   |
+|---------------------|--------------------------------------------------|
+|router.get('/extract-players/:id')| This route is solely for backend purposes, it extracts a requested player by their playerId and saves the infomation related to that player in the database |
+| router.get(/players/:id?/:name?)    | grabs player from local database named Players and sends it to the user on the frontend |
+| router.post(/players/:id?/:name?/favorite)  | the player that is sent sent to the front-end can be sent to the 'Favorite Players" collection based on user choice|
+| router.get(/favorite-list) | Grabs a list of favorite players that are saved in the Favorite Players database and sends it to the front end  |
+| router.put('/favorite-list/:id') | Allows the user to edit player information if not accurate|
 
 
 ## WireFrames
