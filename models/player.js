@@ -1,10 +1,6 @@
 import mongoose from 'mongoose'
 
 const PlayerSchema = new mongoose.Schema ({
-  objectId: {
-    type:mongoose.Schema.Types.ObjectId,
-    required:true,
-  },
   playerId: {
     type: Number,
     required: true,

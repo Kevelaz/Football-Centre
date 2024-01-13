@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { apiBaseURL, headers } from '../config/index.js';
 import Player from '../models/player.js';
-
+//import mongoose from 'mongoose';
 
 const getPlayerById = async (req,res) => {
   try {
@@ -37,6 +37,7 @@ const savePlayerToDatabase = async (playerData) => {
 
     if (!existingPlayer) {
       const newPlayer = new Player ({
+       // objectId: new mongoose.types.ObjectId(),
         playerId: playerId,
         name: name,
         nationality: nationality,
