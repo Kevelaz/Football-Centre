@@ -4,11 +4,6 @@ import Player from '../models/player.js';
 
 
 
-const rootHandler = (req, res) => {
-  res.send('hello. this is the root path!')
-}
-
-
 const getPlayerById = async (req,res) => {
   try {
     const personId = req.params.id;
@@ -94,7 +89,6 @@ const getPlayerInfo = async (req, res) => {
 
 
 const mainController = {
-  rootHandler,
   getPlayerById,
   getPlayerInfo,
   
