@@ -1,7 +1,13 @@
 import axios from 'axios';
 import { apiBaseURL, headers } from '../config/index.js';
 import Player from '../models/player.js';
-//import mongoose from 'mongoose';
+
+
+
+const rootHandler = (req, res) => {
+  res.send('hello. this is the root path!')
+}
+
 
 const getPlayerById = async (req,res) => {
   try {
@@ -88,6 +94,7 @@ const getPlayerInfo = async (req, res) => {
 
 
 const mainController = {
+  rootHandler,
   getPlayerById,
   getPlayerInfo,
   
