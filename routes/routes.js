@@ -6,6 +6,7 @@ import favoriteController from '../controllers/favoriteController.js'
 
 const router = express.Router()
 
+router
 
 router.get('/extract-players/:id', mainController.getPlayerById);
 

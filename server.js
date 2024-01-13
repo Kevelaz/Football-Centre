@@ -17,7 +17,7 @@ app.use(cors())
 app.use(express.json())
 
 
-app.use('/users', userRouter)
+app.use('/', userRouter)
 app.use('/main', router)
 
 
